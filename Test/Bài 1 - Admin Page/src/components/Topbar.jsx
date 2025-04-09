@@ -29,8 +29,6 @@ const Topbar = () => {
       title = "Dashboard";
   }
 
-  console.log(title);
-
   return (
     <div className="flex flex-row justify-between items-center min-h-[100px] border-b-2 border-gray-300 px-12">
       <div className="text-3xl text-pink-500 font-bold flex flex-row items-center">

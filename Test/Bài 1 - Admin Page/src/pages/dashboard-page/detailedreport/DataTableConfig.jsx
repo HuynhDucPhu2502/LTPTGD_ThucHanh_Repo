@@ -1,6 +1,6 @@
-import { PencilIcon } from "lucide-react";
+import { PencilIcon, Trash } from "lucide-react";
 
-export const columns = (handleStartEdit) => [
+export const columns = (handleStartEdit, handleStartRemove) => [
   {
     name: "Customer Name",
     selector: (row) => row.name,
@@ -56,9 +56,21 @@ export const columns = (handleStartEdit) => [
     cell: (row) => (
       <button
         onClick={() => handleStartEdit(row)}
-        className="p-1 hover:text-pink-600 cursor-pointer"
+        className="p-1 text-pink-500 hover:text-pink-700 cursor-pointer"
       >
         <PencilIcon className="w-5 h-5" />
+      </button>
+    ),
+    ignoreRowClick: true,
+  },
+  {
+    name: "Delete",
+    cell: (row) => (
+      <button
+        onClick={() => handleStartRemove(row)}
+        className="p-1 text-red-500 hover:text-red-700 cursor-pointer "
+      >
+        <Trash className="w-5 h-5" />
       </button>
     ),
     ignoreRowClick: true,

@@ -59,3 +59,25 @@ export const updateCustomer = async (id, newCustomer) => {
     console.error("Xảy ra lỗi trong lúc fetch: ", e);
   }
 };
+
+export const deleteCustomer = async (id) => {
+  try {
+    const response = await fetch(
+      `https://67dfef6b7635238f9aabca61.mockapi.io/customer/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      return true;
+    }
+
+    return false;
+  } catch (e) {
+    console.error("Xảy ra lỗi trong lúc fetch: ", e);
+  }
+};

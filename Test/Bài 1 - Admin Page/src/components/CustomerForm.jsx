@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CustomerForm = ({ onSave, initialData, action }) => {
+const CustomerForm = ({ onSave, initialData, status }) => {
   const [customerName, setCustomerName] = useState(initialData?.name || "");
   const [companyName, setCompanyName] = useState(
     initialData?.company_name || ""
@@ -11,7 +11,7 @@ const CustomerForm = ({ onSave, initialData, action }) => {
       ? new Date(initialData.order_date).toLocaleDateString()
       : ""
   );
-  const [status, setStatus] = useState(initialData?.status || "New");
+  const [orderStatus, setOrderStatus] = useState(initialData?.status || "New");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -22,16 +22,16 @@ const CustomerForm = ({ onSave, initialData, action }) => {
       company_name: companyName,
       order_value: orderValue,
       order_date: formattedDate,
-      status: status,
+      status: orderStatus,
     };
 
     setIsLoading(true);
-    switch (action) {
-      case "update": {
+    switch (status) {
+      case "UPDATING": {
         await onSave(initialData.id, newCustomer);
         break;
       }
-      case "add": {
+      case "ADDING": {
         await onSave(newCustomer);
         break;
       }
@@ -89,9 +89,9 @@ const CustomerForm = ({ onSave, initialData, action }) => {
       <div className="flex flex-col gap-2">
         <label className="text-gray-700 font-semibold">Status</label>
         <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="border p-3 rounded-md  focus:border-transparent focus:outline-none focus:ring-2 focus:ring-pink-500"
+          value={orderStatus}
+          onChange={(e) => setOrderStatus(e.target.value)}
+          className="border p-3 rounded-md focus:border-transparent focus:outline-none focus:ring-2 focus:ring-pink-500"
         >
           <option value="New">New</option>
           <option value="In-progress">In-progress</option>
